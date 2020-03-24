@@ -7,6 +7,11 @@ const LANG = 'fr';
 const STARTING_YEAR = 1900;
 const MAX_YEAR=2018;
 
+const dir = './dataset';
+
+if (!fs.existsSync(dir)){
+    fs.mkdirSync(dir);
+}
 function getEvents(year) {
 
     console.log("Parsing year " + year + "." );
@@ -28,7 +33,7 @@ function getEvents(year) {
         paraph.find('li')
         .each( function(idx, event){        
             str = year + ',' +$(this).text()+'\n';
-            fs.appendFile('chronology.txt', str, function (err) {
+            fs.appendFile(`${dir}/chronology.csv`, str, 'utf8', function (err) {
                 if (err) throw err;
                 
               });
